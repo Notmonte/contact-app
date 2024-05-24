@@ -1,11 +1,11 @@
 import { useEffect } from "react"
-import { Outlet, Link, NavLink, useLoaderData, useNavigation, Form, redirect, useSubmit } from "react-router-dom"
+import { Outlet, NavLink, useLoaderData, useNavigation, Form, redirect, useSubmit } from "react-router-dom"
 import { getContacts, createContact }  from "../contacts"
 
 export async function loader({ request }) {
     const url = new URL(request.url)
     const q = url.searchParams.get("q")
-    const contacts = await getContacts();
+    const contacts = await getContacts(q);
     return { contacts, q }
 }
 
@@ -79,7 +79,7 @@ useEffect(()=> {
                                     ) : (
                                         <i>No Name</i>
                                     )} {" "}
-                                    {contact.favorite && <sapan>★</sapan>}
+                                    {contact.favorite && <span>★</span>}
                                 </NavLink>
                             </li>
                         ))}
